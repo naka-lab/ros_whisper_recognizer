@@ -13,7 +13,7 @@ git clone https://github.com/naka-lab/ros_whisper_recognizer.git
 
 ## 実行
 - 音声認識単体で実行：`rosrun ros_whisper_recognizer recognizer.py`
-- [言語理解ノード](https://github.com/naka-lab/ros_google_speech)と同時起動：`roslaunch ros_whisper_recognizer language_understanding.launch`
+- [言語理解ノード](https://github.com/naka-lab/ros_google_speech#%E6%96%87%E6%B3%95%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AE%E8%A8%80%E8%AA%9E%E7%90%86%E8%A7%A3)と同時起動：`roslaunch ros_whisper_recognizer language_understanding.launch`
 
 ## トピック
 - Publish
