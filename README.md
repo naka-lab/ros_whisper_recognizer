@@ -3,13 +3,20 @@
 [Whisper](https://github.com/openai/whisper)を使った音声認識ノード
 
 ## インストール
-```
-pip install git+https://github.com/openai/whisper.git --use-feature=2020-resolver
-pip install pyaudio
+- ```
+  pip install git+https://github.com/openai/whisper.git
+  ```
+  もしこれでエラーが出たら，以下を試す．
+  ```
+  pip install git+https://github.com/openai/whisper.git --use-feature=2020-resolver
+  ```
+- ```
+  pip install pyaudio
+  sudo apt install ffmpeg
 
-cd ~/catkin_ws/src
-git clone https://github.com/naka-lab/ros_whisper_recognizer.git
-```
+  cd ~/catkin_ws/src
+  git clone https://github.com/naka-lab/ros_whisper_recognizer.git
+  ```
 
 ## 実行
 - 音声認識単体で実行：`rosrun ros_whisper_recognizer recognizer.py`
