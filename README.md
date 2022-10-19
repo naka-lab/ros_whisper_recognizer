@@ -11,7 +11,7 @@
   pip install git+https://github.com/openai/whisper.git --use-feature=2020-resolver
   ```
 - ```
-  pip install pyaudio
+  conda install pyaudio
   sudo apt install ffmpeg
 
   cd ~/catkin_ws/src
