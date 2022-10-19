@@ -28,3 +28,16 @@
   - `whisper_recognizer/recres_nbest`:認識結果の文字列（[Google音声認識](https://github.com/naka-lab/ros_google_speech)と同様のyaml形式）
 - Subscribe
   - なし
+
+## トラブルシューティング
+- 以下のようなエラーが発生する場合
+  ```
+  urllib.error.URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1123)>
+  ```
+  以下のコマンドを実行する．
+  ```
+  sudo apt install ca-certificates
+  sudo update-ca-certificates --fresh
+  export SSL_CERT_DIR=/etc/ssl/certs
+  ```
+  
