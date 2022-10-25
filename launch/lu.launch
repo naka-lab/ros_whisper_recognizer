@@ -1,8 +1,10 @@
 <launch>
   <node pkg="ros_whisper_recognizer" type="recognizer.py" name="whisper_recognizer" cwd="node" output="screen">
+  <remap from="whisper_recognizer/recres_nbest" to="google_speech/recres_nbest" />
+  <remap from="whisper_recognizer/recres" to="google_speech/recres" />
   </node>
 
   <node pkg="ros_google_speech" type="grammar_lang_understanding.py" name="grammar_lang_understanding" cwd="node" output="screen">
-  <remap from="google_speech/recres_nbest" to="whisper_recognizer/recres_nbest" />
   </node>
+
 </launch>
