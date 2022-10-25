@@ -14,6 +14,8 @@ import matplotlib
 # Whisperの設定
 whisper_options = whisper.DecodingOptions(language="japanese", fp16=False) # 型でエラーが起きる場合はfp16の値を変える
 model = whisper.load_model("small").to("cuda")
+LOGPROB_THRESHOLD = -1.0
+NO_SPEECH_PROB_THRESHOLD = 0.6
 
 # VADの設定
 VAD_POWER_THRESHOLD = 2000000
@@ -120,9 +122,17 @@ def recognize(wave):
     #_, probs = model.detect_language(mel)
     result = whisper.decode(model, mel, whisper_options)
 
-    print(f"  -> Recognition result:{result.text} [{time.time()-start} sec]")
+    print(f"text = {result.text}")
+    print(f"time = {time.time()-start} sec")
+    print(f"log_prob = {result.avg_logprob}")
+    print(f"no_speech_prob = {result.no_speech_prob}")
 
-    return result.text
+    if result.avg_logprob < LOGPROB_THRESHOLD or result.no_speech_prob>NO_SPEECH_PROB_THRESHOLD:
+        print("  -> Rejected...")
+        return None
+    else:
+        print("  -> Accepted")
+        return result 
 
 
 def main():
@@ -134,11 +144,16 @@ def main():
                     frames_per_buffer=1024)
 
     while not rospy.is_shutdown():
+        print("--------- Recoding ----------")
         wave = record(stream)
+        print("-------- Recognizing --------")
         result = recognize( wave )
+        print("-----------------------------")
+        print("")
 
-        pub_recres.publish( result )
-        pub_recres_nbest.publish( yaml.dump([{"text":result, "conf":0.0}]) )
+        if result is not None:
+            pub_recres.publish( result )
+            pub_recres_nbest.publish( yaml.dump([{"text":result.text, "conf":result.avg_logprob}]) )
 
     stream.close()
 
