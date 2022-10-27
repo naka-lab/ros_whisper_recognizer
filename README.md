@@ -1,6 +1,6 @@
 # ros_whisper_recognzer
 
-[Whisper](https://github.com/openai/whisper)を使った音声認識ノード
+発話区間検出に[Silero VAD](https://github.com/snakers4/silero-vad)を，認識に[Whisper](https://github.com/openai/whisper)を使った音声認識ノード
 
 ## インストール
 - ```
